@@ -24,6 +24,7 @@ char randomBase(int A, int G, int C, int T)
 
 void createSeq(std::vector<char> &seq , int n)
 {
+  seq.clear();
   for (int i = 0; i < n; ++i) //Create random sequence
     seq.push_back(randomBase(1, 4, 2, 3));
 }
@@ -83,7 +84,9 @@ int main(int argc, char *argv[])
 //  std::cout << "G appears " << countA << " times" << std::endl;
   
 
-  int k = findk(seq);
-  std::cout << "k = " << k << std::endl;
+  for (int i = 0; i < 10000; ++i){
+    createSeq(seq, n);
+    std::cout << findk(seq) << " ";
+  }
   return 0;
 }
