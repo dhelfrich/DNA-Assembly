@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
   for (int i = 0; i < 10000; ++i){
     createSeq(seq, n);
-    std::cout << findk(seq) << " ";
+    std::cout << findk(seq) << ",";
   }
   return 0;
 }
