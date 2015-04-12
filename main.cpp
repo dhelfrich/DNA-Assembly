@@ -84,9 +84,29 @@ int main(int argc, char *argv[])
 //  std::cout << "G appears " << countA << " times" << std::endl;
   
 
-  for (int i = 0; i < 10000; ++i){
-    createSeq(seq, n);
-    std::cout << findk(seq) << std::endl;
+//  for (int i = 0; i < 10000; ++i){
+//    createSeq(seq, n);
+//    std::cout << findk(seq) << std::endl;
+//  }
+  std::vector<char> seq32;                                              
+  std::vector<char> seq64;                                              
+  std::vector<char> seq128;                                              
+  std::vector<char> seq256;                                              
+  std::vector<char> seq512;                                              
+  std::cout << "k32,k64,k128,k256,k512" << std::endl;
+  for (int i = 0; i < n; ++i){
+    createSeq(seq32, 32);
+    createSeq(seq64, 64);
+    createSeq(seq128, 128);
+    createSeq(seq256, 256);
+    createSeq(seq512, 512);
+
+    std::cout <<
+      findk(seq32) << "," << 
+      findk(seq64) <<  "," << 
+      findk(seq128) << "," << 
+      findk(seq256) << "," << 
+      findk(seq512) << std::endl;
   }
   return 0;
 }
