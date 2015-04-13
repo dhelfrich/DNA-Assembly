@@ -1,6 +1,5 @@
 #include "dna.assemble.h"
 
-
 //A, G, C, T are numbers between 1 and 10, summing to 10, representing
 //the proportion of bases in the random strand
 char randomBase(int A, int G, int C, int T)
@@ -44,44 +43,84 @@ void readSeq(std::vector<char> &seq, std::ifstream& input)
 //The smallest number s.t. each subsequence of length
 //k occurs at most once
 
-int findk(const std::vector<char> & seq, bool verbose)
-{
+int findk(const std::vector<char>& seq, bool verbose) {
   int startPos = 0;
   int n = seq.size();
-  for (int k = 1; k < n; ++k) //for all k's less than the size
-    if(testk(seq, k, startPos, verbose))
+  bool reverse = false;
+  int k_unique = n;
+  for (int k = 1; k < n; ++k) {  //for all k's less than the size
+    if (testk(seq, k, startPos, reverse, verbose)) {
+      k_unique = k;
+      break;
+    }
+  }
+
+  reverse = true;
+  startPos = 0;
+  for (int k = k_unique; k < n; ++k) {  //for all k's less than the size
+    if (testk(seq, k, startPos, reverse, verbose)) {
       return k;
+    }
+  }
   return n;
 }
 
-inline bool compare(std::vector<char>::const_iterator startPos1,  
-    std::vector<char>::const_iterator startPos2, int k)
-{
-  for (int i = 0; i < k; ++i)
-     if(*(startPos1 + i) != *(startPos2 + i))
-       return false;
-  return true;
+// Compare kmers, including circularity and reverse complements.
+// Params:
+//   seq the sequence to compare
+//   seq_size the number of characters in the sequence.
+//   pos1 the position of the first base in the first kmer
+//   pos2 the position of the first base in the second kmer
+//   k the size of the kmers
+//   rev_comp if true, compare reverse complements.
+bool compare(const std::vector<char>& seq,
+        int pos1, int pos2, int k, bool rev_comp) {
+  int seq_size = seq.size();
+  if (rev_comp) {
+    for (int i = 0; i < k; ++i) {
+      char base1 = seq[(pos1 + i) % seq_size];
+      char base2 = seq[(3*seq_size - 1 - pos2 - i) % (seq_size)];
+      switch (base1) {
+        case 'A':
+          if (base2 != 'T') return false;
+          break;
+        case 'T':
+          if (base2 != 'A') return false;
+          break;
+        case 'G':
+          if (base2 != 'C') return false;
+          break;
+        case 'C':
+          if (base2 != 'G') return false;
+          break;
+        default:
+          std::cerr << "Invalid base type detected." << std::endl;
+          throw 100;
+      }
+    }
+    return true;
+  } else {
+    for (int i = 0; i < k; ++i) {
+      char base1 = seq[(pos1 + i) % seq_size];
+      char base2 = seq[(pos2 + i) % seq_size];
+      if (seq[(pos1 + i) % seq_size] != seq[(pos2 + i) % seq_size]) return false;
+    }
+    return true;
+  }
 }
- 
-inline bool testk(const std::vector<char> & seq, int k, int &startPos, bool verbose)
-{
-  std::vector<char>::const_iterator first =seq.begin();
+
+bool testk(const std::vector<char>& seq, int k, int& startPos, bool reverse, bool verbose) {
   int n = seq.size();
-  if (verbose)
-    std::cout << "k = " << k << std::endl;
-  for (; startPos < n - k + 1; ++startPos){ //for each starting position
-    if (verbose && startPos % 10000 == 0)
-      std::cout << "start pos: " << startPos << std::endl;
-    for (int j = startPos + 1; j < n - k + 1; ++j){//check k-mer against remaining sequence
-      if(compare(first + startPos, first + j, k)){
-        if(verbose){
+  for (; startPos < n; ++startPos){  //for each starting position
+    if (verbose && startPos % 10000 == 0) std::cout << "start pos: " << startPos << std::endl;
+    for (int j = startPos + 1; j <= startPos + 1 + k; ++j){  //check k-mer against remaining sequence
+      if (compare(seq, startPos, j, k, reverse)){
+        if (verbose){
           std::cout << "section at pos: " << startPos << " = section at pos: " << j << std::endl;
         }
-        return false; //repeated
+        return false;  //repeated
       }
     }
   }
-  return true; //unique
+  return true;  //unique
 }
-
-
