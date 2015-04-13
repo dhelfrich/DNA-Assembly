@@ -46,24 +46,29 @@ void readSeq(std::vector<char> &seq, std::ifstream& input)
 
 int findk(const std::vector<char> & seq, bool verbose)
 {
+  int startPos = 0;
   int n = seq.size();
   for (int k = 1; k < n; ++k) //for all k's less than the size
-    if(testk(seq, k, verbose))
+    if(testk(seq, k, startPos, verbose))
       return k;
   return n;
 }
  
-inline bool testk(const std::vector<char> & seq, int k, bool verbose)
+bool testk(const std::vector<char> & seq, int k, int &startPos, bool verbose)
 {
   std::vector<char>::const_iterator first =seq.begin();
   int n = seq.size();
-  for (int i = 0; i < n - k + 1; ++i){ //for each starting position
-    std::vector<char> kmer(first + i, first + i + k);
-    for (int j = i + 1; j < n - k + 1; ++j){//check k-mer against remaining sequence
+  if (verbose)
+    std::cout << "k = " << k << std::endl;
+  for (; startPos < n - k + 1; ++startPos){ //for each starting position
+    if (verbose && startPos % 10000 == 0)
+      std::cout << "start pos: " << startPos << std::endl;
+    std::vector<char> kmer(first + startPos, first + startPos + k);
+    for (int j = startPos + 1; j < n - k + 1; ++j){//check k-mer against remaining sequence
       std::vector<char> section(first + j, first + j + k);
       if(kmer == section){
         if(verbose){
-          std::cout << "section at pos: " << i << " = section at pos: " << j << std::endl;
+          std::cout << "section at pos: " << startPos << " = section at pos: " << j << std::endl;
           std::cout << "section = ";
           std::copy(kmer.begin(), kmer.end(), std::ostream_iterator<char>(std::cout, " "));
           std::cout << std::endl;

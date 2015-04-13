@@ -1,8 +1,5 @@
 #include "main.h"
 
-
-
-
 int main(int argc, char *argv[])
 {
   struct timespec ts;
@@ -21,7 +18,7 @@ if(n == 0)
   //std::cout << "seq = ";                                                          
   //std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
   //std::cout << std::endl;                                                         
-  std::cout << "k = " << findk(seq, 1) << std::endl;                              
+  std::cout << "k = " << findk(seq, 0) << std::endl;                              
 }
 else
 {
@@ -40,7 +37,7 @@ else
 
     std::cout <<
       findk(seq32,0) << "," << 
-      findk(seq64,0) <<  "," << 
+      findk(seq64,0) <<  "," <<
       findk(seq128,0) << "," << 
       findk(seq256,0) << "," << 
       findk(seq512,0) << std::endl;
