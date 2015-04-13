@@ -36,27 +36,9 @@ void createSeq(std::vector<char> &seq , int n)
 int findk(const std::vector<char> & seq, bool verbose)
 {
   int n = seq.size();
-  std::vector<char>::const_iterator first =seq.begin();
-  for (int k = 1; k < n; ++k){ //for all k's less than the size
-NEW_K: //Break out of loops
-    for (int i = 0; i < n - k; ++i){ //for each starting position
-      std::vector<char> kmer(first + i, first + i + k);
-      for (int j = i + 1; j < n; ++j){//check k-mer against remaining sequence
-        std::vector<char> section(first + j, first + j + k);
-        if(kmer == section){
-          if(verbose){
-              std::cout << "section at pos: " << i << " = section at pos: " << j << std::endl;
-              std::cout << "section = ";
-              std::copy(kmer.begin(), kmer.end(), std::ostream_iterator<char>(std::cout, " "));
-              std::cout << std::endl;
-            }
-          k++;
-          goto NEW_K;
-        }
-      }
-    }
-    return k;
-  }
+  for (int k = 1; k < n; ++k) //for all k's less than the size
+    if(testk(seq, k, verbose))
+      return k;
   return 0;
 }
  

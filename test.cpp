@@ -15,15 +15,15 @@ int main(int argc, char *argv[])
   std::cout << "seq = "; 
   std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " "));
   std::cout << std::endl;
-//  std::cout << "k = " << findk(seq, 1) << std::endl;
-  int k = 1;
-  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
-  k = 2;
-  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
-  k = 3;
-  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
-  k = 4;
-  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
+  std::cout << "k = " << findk(seq, 1) << std::endl;
+//  int k = 1;
+//  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
+//  k = 2;
+//  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
+//  k = 3;
+//  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
+//  k = 4;
+//  std::cout << "k = " << k << " Unique?: " << testk(seq, k, true) << std::endl;
   
 //  int countA = 0;
 //  for (std::vector<char>::const_iterator i = seq.begin(); i != seq.end(); ++i) {
