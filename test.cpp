@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
   // Just a smoketest.
   createSeq(seq, n);
 
+//  std::vector<char> seq = {'A','T','G','A'};
+//  createSeq(seq, n);
 //  std::cout << "seq = "; 
 //  std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " "));
 //  std::cout << std::endl;
@@ -49,6 +51,15 @@ int main(int argc, char *argv[])
 //  }
 //  std::cout << "G appears " << countA << " times" << std::endl;
   
+
+//  std::vector<char> seq;
+//  createSeq(seq, n);                                                              
+//  std::cout << "seq = ";                                                          
+//  std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
+//  std::cout << std::endl;                                                         
+//  std::cout << "k = " << findk(seq, 1) << std::endl;                              
+
+  //read the file
 
   return 0;
 }

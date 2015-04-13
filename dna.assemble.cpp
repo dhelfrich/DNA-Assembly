@@ -29,6 +29,17 @@ void createSeq(std::vector<char> &seq , int n)
     seq.push_back(randomBase(1, 4, 2, 3));
 }
 
+void readSeq(std::vector<char> &seq, std::ifstream& input)
+{
+  seq.clear();
+  char base;
+  while(input >> base) {
+    if(base != ' ')
+      seq.push_back(std::toupper(base));
+  }
+  return;
+}
+
 //Brute force algorithm to find k,
 //The smallest number s.t. each subsequence of length
 //k occurs at most once
@@ -42,7 +53,7 @@ int findk(const std::vector<char> & seq, bool verbose)
   return n;
 }
  
-bool testk(const std::vector<char> & seq, int k, bool verbose)
+inline bool testk(const std::vector<char> & seq, int k, bool verbose)
 {
   std::vector<char>::const_iterator first =seq.begin();
   int n = seq.size();

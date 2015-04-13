@@ -13,27 +13,18 @@ int main(int argc, char *argv[])
   if (argc > 1)
     n = atoi(argv[1]);
 
-
-  std::vector<char> seq;
-//  createSeq(seq, n);
-//
-//  std::cout << "seq = "; 
-//  std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " "));
-//  std::cout << std::endl;
-//  std::cout << "k = " << findk(seq) << std::endl;
-//  
-//  int countA = 0;
-//  for (std::vector<char>::const_iterator i = seq.begin(); i != seq.end(); ++i) {
-//    if (*i == 'C')
-//      countA++;
-//  }
-//  std::cout << "G appears " << countA << " times" << std::endl;
-  
-
-//  for (int i = 0; i < 10000; ++i){
-//    createSeq(seq, n);
-//    std::cout << findk(seq) << std::endl;
-//  }
+std::vector<char> seq;
+if(n == 0)
+{
+  std::ifstream inputfile(argv[2]);
+  readSeq(seq, inputfile);
+  //std::cout << "seq = ";                                                          
+  //std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
+  //std::cout << std::endl;                                                         
+  std::cout << "k = " << findk(seq, 1) << std::endl;                              
+}
+else
+{
   std::vector<char> seq32;                                              
   std::vector<char> seq64;                                              
   std::vector<char> seq128;                                              
@@ -54,5 +45,6 @@ int main(int argc, char *argv[])
       findk(seq256,0) << "," << 
       findk(seq512,0) << std::endl;
   }
+}
   return 0;
 }

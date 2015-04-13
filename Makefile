@@ -2,7 +2,7 @@ CC=gcc
 CXX=g++
 RM=rm -f
 CPPFLAGS= -g -O2 -std=c++11
-LDFLAGS= -c -g -O2 -std=c++11
+LDFLAGS= -c -g -O2 -std=c++11 -fopenmp
 OBJS = dna.assemble.o
 
 SRCS= main.cpp
