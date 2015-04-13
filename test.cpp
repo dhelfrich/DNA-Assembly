@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
   seq = {'A', 'T', 'A', 'T'};
   if (findk(seq, false) != 3) return 3;
   seq = {'A', 'T', 'A', 'T', 'A'};
-  if (findk(seq, false) != 4) return 3;
+  if (findk(seq, false) != 4) return 4;
   seq = {'A', 'G', 'A', 'T', 'A'};
-  if (findk(seq, false) != 2) return 3;
+  if (findk(seq, false) != 2) return 5;
 
   // Just a smoketest.
   createSeq(seq, n);
