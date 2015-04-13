@@ -18,7 +18,7 @@ if(n == 0)
   //std::cout << "seq = ";                                                          
   //std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
   //std::cout << std::endl;                                                         
-  std::cout << "k = " << findk(seq, 0) << std::endl;                              
+  std::cout << "k = " << findk(seq, 1) << std::endl;                              
 }
 else
 {

@@ -13,5 +13,7 @@ void createSeq(std::vector<char> &seq , int n);
 int findk(const std::vector<char> & seq, bool verbose);
 bool testk(const std::vector<char> & seq, int k, int& startPos, bool verbose);
 void readSeq(std::vector<char> &seq, std::ifstream& input);
+bool compare(std::vector<char>::const_iterator startPos1,  
+    std::vector<char>::const_iterator startPos2, int k);
 
 

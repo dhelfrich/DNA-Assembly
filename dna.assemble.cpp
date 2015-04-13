@@ -53,8 +53,17 @@ int findk(const std::vector<char> & seq, bool verbose)
       return k;
   return n;
 }
+
+inline bool compare(std::vector<char>::const_iterator startPos1,  
+    std::vector<char>::const_iterator startPos2, int k)
+{
+  for (int i = 0; i < k; ++i)
+     if(*(startPos1 + i) != *(startPos2 + i))
+       return false;
+  return true;
+}
  
-bool testk(const std::vector<char> & seq, int k, int &startPos, bool verbose)
+inline bool testk(const std::vector<char> & seq, int k, int &startPos, bool verbose)
 {
   std::vector<char>::const_iterator first =seq.begin();
   int n = seq.size();
@@ -63,15 +72,10 @@ bool testk(const std::vector<char> & seq, int k, int &startPos, bool verbose)
   for (; startPos < n - k + 1; ++startPos){ //for each starting position
     if (verbose && startPos % 10000 == 0)
       std::cout << "start pos: " << startPos << std::endl;
-    std::vector<char> kmer(first + startPos, first + startPos + k);
     for (int j = startPos + 1; j < n - k + 1; ++j){//check k-mer against remaining sequence
-      std::vector<char> section(first + j, first + j + k);
-      if(kmer == section){
+      if(compare(first + startPos, first + j, k)){
         if(verbose){
           std::cout << "section at pos: " << startPos << " = section at pos: " << j << std::endl;
-          std::cout << "section = ";
-          std::copy(kmer.begin(), kmer.end(), std::ostream_iterator<char>(std::cout, " "));
-          std::cout << std::endl;
         }
         return false; //repeated
       }

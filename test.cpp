@@ -53,11 +53,11 @@ int main(int argc, char *argv[])
   
 
 //  std::vector<char> seq;
-//  createSeq(seq, n);                                                              
-//  std::cout << "seq = ";                                                          
-//  std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
-//  std::cout << std::endl;                                                         
-//  std::cout << "k = " << findk(seq, 1) << std::endl;                              
+  createSeq(seq, n);                                                              
+  std::cout << "seq = ";                                                          
+  std::copy(seq.begin(), seq.end(), std::ostream_iterator<char>(std::cout, " ")); 
+  std::cout << std::endl;                                                         
+  std::cout << "k = " << findk(seq, 1) << std::endl;                              
 
   //read the file
 
