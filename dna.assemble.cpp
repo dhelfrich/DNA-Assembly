@@ -39,16 +39,16 @@ int findk(const std::vector<char> & seq, bool verbose)
   for (int k = 1; k < n; ++k) //for all k's less than the size
     if(testk(seq, k, verbose))
       return k;
-  return 0;
+  return n;
 }
  
 bool testk(const std::vector<char> & seq, int k, bool verbose)
 {
   std::vector<char>::const_iterator first =seq.begin();
   int n = seq.size();
-  for (int i = 0; i < n - k; ++i){ //for each starting position
+  for (int i = 0; i < n - k + 1; ++i){ //for each starting position
     std::vector<char> kmer(first + i, first + i + k);
-    for (int j = i + 1; j < n - k; ++j){//check k-mer against remaining sequence
+    for (int j = i + 1; j < n - k + 1; ++j){//check k-mer against remaining sequence
       std::vector<char> section(first + j, first + j + k);
       if(kmer == section){
         if(verbose){
